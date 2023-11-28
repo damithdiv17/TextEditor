@@ -45,6 +45,12 @@
     opacity: 60%;
 } 
 
+
+.images3{
+    width: 90%;
+    height: 90%;
+    opacity: 60%;
+} 
     </style>
 </head>
 
@@ -57,6 +63,10 @@
             <button type="button" class="btn bg-dark bt" onclick="applyStyle('underline')"><img class="images2" src="Resources/format_underline_white_192x192.png" alt=""></button>
             <button type="button" class="btn bg-dark bt" onclick="applyStyle('italic')"><img class="images1" src="Resources/italic-xxl.png" alt=""></button>
             <button type="button" class="btn bg-dark bt"><input type="color" id="fontColorPicker" class="picker"></button>
+            <button type="button" class="btn bg-dark" onclick="applyAlignment('left')"><img class="images3" src="Resources/left.png" alt=""></button>
+            <button type="button" class="btn bg-dark" onclick="applyAlignment('center')"><img class="images3" src="Resources/center.png" alt=""></button>
+            <button type="button" class="btn bg-dark" onclick="applyAlignment('right')"><img class="images3" src="Resources/right.png" alt=""></button>
+            <button type="button" class="btn bg-dark" onclick="applyAlignment('justify')"><img class="images3" src="Resources/justify.png" alt=""></button>
         </div>
       </div>
 
@@ -88,6 +98,20 @@
        var color = this.value;
        document.execCommand('foreColor', false, color);
    });
+
+//    text allign functions
+   function applyAlignment(alignment) {
+       // Save the current state for undo
+      var editorContent = document.getElementById('editor').innerHTML;
+       undoStack.push(editorContent);
+
+      // Apply the alignment
+       document.getElementById('editor').style.textAlign = alignment;
+
+       // Save the state after applying the alignment for redo
+      redoStack = [];
+       redoStack.push(document.getElementById('editor').innerHTML);
+   }
 
 </script>
     
